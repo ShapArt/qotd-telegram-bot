@@ -1,37 +1,63 @@
-﻿# QOTD Telegram Bot
+# Go Out Today (Telegram Mini App)
 
 ## ✨ Что умеет
-- Шлёт «вопрос/цитату/слово дня» в Telegram по расписанию GitHub Actions (cron) или руками через `workflow_dispatch`.
-- Источники: Open Trivia DB и The Trivia API (регион RU), варианты/ответ перемешаны, ответ пишет только в логи.
-- CLI/cron без long-polling: `python bot/main.py --source opentdb --locale ru`.
-- Локализация в RU/EN: заголовки/подсказки подстраиваются по `LOCALE`.
-- Секреты только из GitHub Secrets (`BOT_TOKEN`, `CHAT_ID`), без .env в коммитах.
+
+- «Tinder для мест»: бары/кафе/события по городу, свайпы, матчи для пары/группы.
+- Фильтры по категориям, цене, времени работы, «рядом со мной»; таймер «свободен через X минут».
+- Совместный выбор: пригласить друзей, общий матч, уведомления через бота.
 
 ## 🧠 Технологии
-- Python 3.11+, requests.
-- GitHub Actions: матрица CI (lint/test), отдельный scheduler для рассылки.
-- pre-commit + gitleaks (--redact) для локальной и CI-проверки.
+
+- Bot: Aiogram 3.x для инвайтов/уведомлений.
+- Mini App: React/Vite + Telegram WebApps SDK.
+- API: FastAPI proxy 2GIS/Google Places, кеш (Redis), rate limits.
+- Безопасность: API ключи через ENV, gitleaks/pre-commit, minimal Actions permissions.
 
 ## 🖼️ Демо
-- Actions: `QOTD Scheduler` запускается раз в день (`cron: 0 7 * * *`) либо по кнопке.
-- Локально: `BOT_TOKEN=xxx CHAT_ID=yyy python bot/main.py --source trivia --locale en`.
 
-## 🏗️ Архитектура
-- Fetcher (`fetch_opentdb` / `fetch_trivia_api`) → message builder → `sendMessage` в Bot API.
-- Scheduler в Actions → `python bot/main.py` на чистом окружении → логирует правильный ответ в job output.
-- Секреты/vars: `BOT_TOKEN`/`CHAT_ID` в secrets, `SOURCE`/`LOCALE` в Actions vars.
+- TODO: добавить скрин/видео mini app и ссылку на стенд.
 
-## ⚙️ Конфигурация
-- `.env.example`: BOT_TOKEN, CHAT_ID, SOURCE (opentdb|trivia), LOCALE (ru|en).
-- Secrets: `BOT_TOKEN`, `CHAT_ID`.
-- Vars (optional): `SOURCE`, `LOCALE`.
+## Архитектура
 
-## 🧪 Тесты
-- Запланированы юниты для форматирования сообщений и fallback при пустом API.
-- CI: pre-commit run --all-files (ruff/black/isort/prettier) + gitleaks detect.
+- `api/` — FastAPI proxy к 2GIS/Google Places, кеширование, фильтры, матчи.
+- `miniapp/` — WebApp UI со свайпами и матчами.
+- `bot/` — aiogram: /start, приглашения, нотификации.
+- `docs/` — overview, ci badge snippet; `assets/` — social preview.
 
-## 🗺️ Roadmap
-- [ ] Кешировать вопросы, чтобы не повторялись подряд.
-- [ ] Добавить режим «цитата дня» из публичного API.
-- [ ] Поддержать MarkdownV2/HTML выбор.
-- [ ] Добавить health-check в Actions и алерт в чат при ошибке.
+## Конфигурация
+
+- `.env.example`: `BOT_TOKEN`, `PLACES_API_KEY`, `PLACES_PROVIDER` (2gis/google), `BACKEND_URL`, `WEBAPP_ORIGIN`, `REDIS_URL`.
+- Секреты не коммитим; gitleaks в pre-commit/CI.
+
+### Локальный запуск
+
+```bash
+pip install -r requirements.txt
+python -m bot.main  # telegram bot stub
+```
+
+API:
+
+```bash
+cd api
+pip install -e .[dev]
+uvicorn app.main:app --reload
+```
+
+Docker Compose:
+
+```bash
+cd infra
+docker compose up --build
+```
+
+## Тесты
+
+- План: `ruff check . && black --check . && mypy . && pytest` для api/bot; miniapp — `npm run lint && npm test` после scaffold.
+
+## Roadmap
+
+- Инициализировать api (FastAPI) и miniapp (React/Vite + TWA SDK).
+- Добавить поиск/свайпы по 2GIS, кеш Redis, матчи для группы.
+- Подключить бот-инвайты/нотификации, deep-link miniapp.
+- Добавить e2e smoke (Playwright) и CI матрицу.

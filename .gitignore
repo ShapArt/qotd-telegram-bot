@@ -11,3 +11,6 @@ Thumbs.db
 node_modules/
 dist/
 build/
+miniapp/node_modules/
+miniapp/dist/
+miniapp/.vite/
