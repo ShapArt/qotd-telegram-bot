@@ -2,10 +2,9 @@
 
 ![Social Preview](https://raw.githubusercontent.com/ShapArt/qotd-telegram-bot/main/.github/social-preview.png)
 
-
-[![Stars](https://img.shields.io/github/stars/ShapArt/=for-the-badge)](https://github.com/ShapArt/qotd-telegram-bot/stargazers)
-[![Last Commit](https://img.shields.io/github/last-commit/ShapArt/=for-the-badge)](https://github.com/ShapArt/qotd-telegram-bot/commits/main)
-[![License](https://img.shields.io/github/license/ShapArt/=for-the-badge)](https://github.com/ShapArt/qotd-telegram-bot/blob/main/LICENSE)
+[![Stars](https://img.shields.io/github/stars/ShapArt/qotd-telegram-bot?style=for-the-badge)](https://github.com/ShapArt/qotd-telegram-bot/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/ShapArt/qotd-telegram-bot?style=for-the-badge)](https://github.com/ShapArt/qotd-telegram-bot/commits/main)
+[![License](https://img.shields.io/github/license/ShapArt/qotd-telegram-bot?style=for-the-badge)](https://github.com/ShapArt/qotd-telegram-bot/blob/main/LICENSE)
 
 ## EN
 Telegram bot for quote-of-the-day delivery and engagement.
@@ -40,6 +39,9 @@ See .github/CONTRIBUTING.md and open a focused PR.
 
 ## License / Лицензия
 See LICENSE.
+
+
+
 
 
 
