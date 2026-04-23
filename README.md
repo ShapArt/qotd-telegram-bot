@@ -1,63 +1,54 @@
-# Go Out Today (Telegram Mini App)
+# qotd-telegram-bot
 
-## ✨ Что умеет
+![License](https://img.shields.io/github/license/ShapArt/qotd-telegram-bot)
+![Last Commit](https://img.shields.io/github/last-commit/ShapArt/qotd-telegram-bot)
+![Language](https://img.shields.io/github/languages/top/ShapArt/qotd-telegram-bot)
 
-- «Tinder для мест»: бары/кафе/события по городу, свайпы, матчи для пары/группы.
-- Фильтры по категориям, цене, времени работы, «рядом со мной»; таймер «свободен через X минут».
-- Совместный выбор: пригласить друзей, общий матч, уведомления через бота.
+## EN Overview
+Project maintained by ShapArt.
 
-## 🧠 Технологии
+## RU Описание
+Project maintained by ShapArt.
 
-- Bot: Aiogram 3.x для инвайтов/уведомлений.
-- Mini App: React/Vite + Telegram WebApps SDK.
-- API: FastAPI proxy 2GIS/Google Places, кеш (Redis), rate limits.
-- Безопасность: API ключи через ENV, gitleaks/pre-commit, minimal Actions permissions.
+## EN Features
+- Clear project purpose and maintainable structure.
+- Standardized community and contribution files.
+- Consistent documentation style across account repositories.
 
-## 🖼️ Демо
+## RU Возможности
+- Понятная цель проекта и поддерживаемая структура.
+- Стандартизированные файлы сообщества и вклада.
+- Единый стиль документации во всех репозиториях аккаунта.
 
-- TODO: добавить скрин/видео mini app и ссылку на стенд.
-
-## Архитектура
-
-- `api/` — FastAPI proxy к 2GIS/Google Places, кеширование, фильтры, матчи.
-- `miniapp/` — WebApp UI со свайпами и матчами.
-- `bot/` — aiogram: /start, приглашения, нотификации.
-- `docs/` — overview, ci badge snippet; `assets/` — social preview.
-
-## Конфигурация
-
-- `.env.example`: `BOT_TOKEN`, `PLACES_API_KEY`, `PLACES_PROVIDER` (2gis/google), `BACKEND_URL`, `WEBAPP_ORIGIN`, `REDIS_URL`.
-- Секреты не коммитим; gitleaks в pre-commit/CI.
-
-### Локальный запуск
-
-```bash
+## EN Quick Start
 pip install -r requirements.txt
-python -m bot.main  # telegram bot stub
-```
+python -m main
 
-API:
+## RU Быстрый старт
+pip install -r requirements.txt
+python -m main
 
-```bash
-cd api
-pip install -e .[dev]
-uvicorn app.main:app --reload
-```
+## EN Project Structure
+- .github/ - templates, policy files, CI config.
+- Source files and assets are stored in repository root or feature directories.
 
-Docker Compose:
+## RU Структура проекта
+- .github/ - шаблоны, policy-файлы, конфиг CI.
+- Исходники и ресурсы находятся в корне или профильных директориях.
 
-```bash
-cd infra
-docker compose up --build
-```
+## EN Roadmap
+- Improve test coverage and automation.
+- Keep docs aligned with actual project behavior.
 
-## Тесты
+## RU Планы
+- Расширять покрытие тестами и автоматизацией.
+- Поддерживать документацию в актуальном состоянии.
 
-- План: `ruff check . && black --check . && mypy . && pytest` для api/bot; miniapp — `npm run lint && npm test` после scaffold.
+## EN Contributing
+See .github/CONTRIBUTING.md.
 
-## Roadmap
+## RU Вклад
+См. .github/CONTRIBUTING.md.
 
-- Инициализировать api (FastAPI) и miniapp (React/Vite + TWA SDK).
-- Добавить поиск/свайпы по 2GIS, кеш Redis, матчи для группы.
-- Подключить бот-инвайты/нотификации, deep-link miniapp.
-- Добавить e2e smoke (Playwright) и CI матрицу.
+## License / Лицензия
+See LICENSE.
